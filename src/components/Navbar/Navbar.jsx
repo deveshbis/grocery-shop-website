@@ -82,10 +82,12 @@ const Navbar = () => {
                         </div>
                         <span className="text-[13px] font-semibold text-[#333]">Cart</span>
                     </div>
+                    <Link href={"/login"}>
+                        <button
+                            className='max-lg:hidden px-4 py-2 text-sm rounded-full text-white border-2 border-[#007bff] bg-[#007bff] hover:bg-[#004bff]'>Sign
+                            In</button>
+                    </Link>
 
-                    <button
-                        className='max-lg:hidden px-4 py-2 text-sm rounded-full text-white border-2 border-[#007bff] bg-[#007bff] hover:bg-[#004bff]'>Sign
-                        In</button>
                 </div>
 
                 {/* Mobile Menu Button */}
