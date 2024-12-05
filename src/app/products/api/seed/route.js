@@ -1,8 +1,5 @@
 import { connectDB } from "@/lib/connectDB";
 import { products } from "@/lib/products";
-import { NextResponse } from "next/server";
-
-
 
 export const GET =async () => {
     const db = await connectDB()
@@ -10,7 +7,7 @@ export const GET =async () => {
     try {
         await productsCollection.deleteMany();
         const resp = await productsCollection.insertMany(products);
-        return NextResponse.json({message : "seeded successfully"})
+        return Response.json({message : "seeded successfully"})
     } catch (error) {
         console.log(error);
     }
