@@ -1,15 +1,44 @@
 "use client"
-import React from 'react';
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import React from "react";
 
 const Register = () => {
+    const router = useRouter();
     const handleSignUp = async (event) => {
         event.preventDefault();
         const newUser = {
-          name: event.target.name.value,
-          email: event.target.email.value,
-          password: event.target.password.value,
+            name: event.target.name.value,
+            email: event.target.email.value,
+            password: event.target.password.value,
         };
-    }
+
+        console.log(newUser);
+
+
+        const resp = await fetch("http://localhost:3000/signup/api", {
+            method: "POST",
+            body: JSON.stringify(newUser),
+            headers: {
+                "content-type": "application/json",
+            },
+        });
+
+        console.log(resp);
+
+        if (resp.status === 200) {
+            const loginResp = await signIn("credentials", {
+                email: newUser.email,
+                password: newUser.password,
+                redirect: false,
+            });
+
+            if (loginResp.status === 200) {
+                router.push("/");
+            }
+        }
+    };
+
     return (
         <div
             className="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
@@ -51,26 +80,26 @@ const Register = () => {
                             className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         />
                     </div>
-                    <div>
-                        <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-600">Confirm Password</label>
-                        <input
-                            type="password"
-                            id="confirm-password"
-                            placeholder="********"
-                            required
-                            className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        />
-                    </div>
+                    {/* <div>
+            <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-600">Confirm Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              placeholder="********"
+              required
+              className="w-full mt-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            />
+          </div> */}
                     <button
                         type="submit"
-                        className="w-full py-2 px-4 bg-[#FF6A1A] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full py-2 px-4 bg-[#FF6A1A] text-white rounded-md  focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         Register
                     </button>
                 </form>
                 <p className="mt-4 text-center text-sm text-gray-600">
                     Already have an account?{" "}
-                    <a href="/login" className="text-[#FF6A1A] hover:underline">
+                    <a href="/login" className="text-blue-600 hover:underline">
                         Login
                     </a>
                 </p>

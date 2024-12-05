@@ -1,8 +1,10 @@
 "use client"
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const Login = () => {
-
+    const router =useRouter();
     const handleLogIn = async (event) => {
         event.preventDefault();
         const email = event.target.email.value;

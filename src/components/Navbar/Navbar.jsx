@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const session = useSession();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -82,11 +84,15 @@ const Navbar = () => {
                         </div>
                         <span className="text-[13px] font-semibold text-[#333]">Cart</span>
                     </div>
-                    <Link href={"/login"}>
-                        <button
-                            className='max-lg:hidden px-4 py-2 text-sm rounded-full text-white border-2 border-[#007bff] bg-[#007bff] hover:bg-[#004bff]'>Sign
-                            In</button>
-                    </Link>
+                    {
+                        !session.data ?
+                            <Link href={"/login"}>
+                                <button
+                                    className='max-lg:hidden px-4 py-2 text-sm rounded-full text-white border-2 bg-[#FF6A1A] '>Sign
+                                    In</button>
+                            </Link> :
+                            <button className='max-lg:hidden px-4 py-2 text-sm rounded-full text-white border-2  bg-[#FF6A1A] ' onClick={()=> signOut()}>Logout</button>
+                    }
 
                 </div>
 
