@@ -1,17 +1,21 @@
 "use client"
-import { products } from '@/lib/product';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Products = () => {
+    const [products, setProducts] = useState([]);
 
-    const [selectedCategory, setSelectedCategory] = useState('all'); // state to track selected category
+    // Fetching product data using useEffect
+    useEffect(() => {
+        const getProduct = async () => {
+            const res = await fetch("http://localhost:3000/products/api/product-data");
+            const data = await res.json();
+            setProducts(data.products); // Assuming the response has 'products' key
+        };
 
-    // Filter items based on selected category
-    const filteredItems = selectedCategory === 'all'
-        ? products
-        : products.filter(item => item.category === selectedCategory);
+        getProduct();
+    }, []);
 
     return (
         <div className='mt-16 max-w-7xl max-md:max-w-md mx-auto'>
@@ -22,36 +26,10 @@ const Products = () => {
                 <p className="mt-4 text-lg text-black font-thin">
                     We pride ourselves on offering a wide variety of fresh and flavorful fruits, <br /> vegetables, and salad ingredients.
                 </p>
-                <div className="font-[sans-serif] space-x-4 space-y-4 text-center">
-                    <button 
-                        onClick={() => setSelectedCategory('all')}
-                        className={`px-5 py-2.5 rounded-lg text-sm tracking-wider font-medium border border-green-700 outline-none bg-transparent hover:bg-green-700 text-green-700  transition-all duration-300 ${selectedCategory === 'all' ? 'bg-green-700 text-white' : ''}`}
-                    >
-                        All
-                    </button>
-                    <button 
-                        onClick={() => setSelectedCategory('fruit')}
-                        className={`px-5 py-2.5 rounded-lg text-sm tracking-wider font-medium border border-green-700 outline-none bg-transparent hover:bg-green-700 text-green-700  transition-all duration-300 ${selectedCategory === 'fruit' ? 'bg-green-700 text-white' : ''}`}
-                    >
-                        Fruit
-                    </button>
-                    <button 
-                        onClick={() => setSelectedCategory('vegetable')}
-                        className={`px-5 py-2.5 rounded-lg text-sm tracking-wider font-medium border border-green-700 outline-none bg-transparent hover:bg-green-700 text-green-700  transition-all duration-300 ${selectedCategory === 'vegetable' ? 'bg-green-700 text-white' : ''}`}
-                    >
-                        Vegetable
-                    </button>
-                    <button 
-                        onClick={() => setSelectedCategory('salad')}
-                        className={`px-5 py-2.5 rounded-lg text-sm tracking-wider font-medium border border-green-700 outline-none bg-transparent hover:bg-green-700 text-green-700  transition-all duration-300 ${selectedCategory === 'salad' ? 'bg-green-700 text-white' : ''}`}
-                    >
-                        Salad
-                    </button>
-                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filteredItems.map((item, index) => (
+                {products?.length > 0 && products.map((item, index) => (
                     <div key={index} className="bg-gray-100 p-2 overflow-hidden cursor-pointer">
                         <div className="bg-white flex flex-col h-full">
                             <div className="w-full h-[250px] overflow-hidden mx-auto bg-[#F4F6F6] ">
@@ -93,8 +71,6 @@ const Products = () => {
 };
 
 export default Products;
-
-
 
 
 
