@@ -156,10 +156,8 @@ const Products = () => {
             </div>
 
             <div className="flex justify-center items-center mt-6">
-
-            <button type="button"
-                        className="px-5 py-2.5 rounded-lg text-sm tracking-wider font-medium border border-[#FF6A1A] outline-none bg-transparent hover:bg-[#FF6A1A]  text-[#FF6A1A]  hover:text-white transition-all duration-300">See All Products</button>
-
+                <button type="button"
+                    className="px-5 py-2.5 rounded-lg text-sm tracking-wider font-medium border border-[#FF6A1A] outline-none bg-transparent hover:bg-[#FF6A1A]  text-[#FF6A1A]  hover:text-white transition-all duration-300">See All Products</button>
             </div>
         </div>
     );

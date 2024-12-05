@@ -3,8 +3,8 @@ import React from 'react';
 const Hero = () => {
     return (
         <div className="font-sans max-w-7xl max-md:max-w-md mx-auto">
-            <div className="grid md:grid-cols-2 items-center md:gap-8 gap-6">
-                <div className="max-md:order-1 max-md:text-center">
+            <div className="grid md:grid-cols-2 items-center md:gap-8 gap-6  bg-[#F4F6F6]">
+                <div className="max-md:order-1 max-md:text-center p-6">
                     <p className="text-sm font-bold text-[#749B3F] mb-2 px-3 py-1.5 tracking-wide rounded-full"> Welcome to Fresh Harvest</p>
                     <h2 className="text-gray-800 md:text-5xl text-3xl font-extrabold mb-4 md:!leading-[55px]">Fresh Fruits and Vegetables</h2>
                     <p className="mt-4 text-base text-gray-600 leading-relaxed">At Fresh Harvests, we are passionate about providing you with the freshest and most flavorful fruits and vegetables</p>
