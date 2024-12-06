@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 const Register = () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     const router = useRouter();
     const handleSignUp = async (event) => {
         event.preventDefault();
@@ -16,7 +17,7 @@ const Register = () => {
         console.log(newUser);
 
 
-        const resp = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup/api`, {
+        const resp = await fetch(`${apiUrl}/signup/api`, {
             method: "POST",
             body: JSON.stringify(newUser),
             headers: {
