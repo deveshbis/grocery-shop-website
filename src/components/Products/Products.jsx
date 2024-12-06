@@ -1,11 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import { getProducts } from '@/services/getProducts';
 
-const getProducts = async () => {
-    const res = await fetch("http://localhost:3000/products/api/product-data")
-    const products = res.json()
-    return products;
-}
 
 const Products = async () => {
     const { products } = await getProducts()
@@ -23,9 +19,7 @@ const Products = async () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {
                     products?.length > 0 && products?.map((product) => (
-                        // 
-
-                        // </div>
+                        
                         <ProductCard product={product} key={product._id}/>
                     ))}
             </div>
