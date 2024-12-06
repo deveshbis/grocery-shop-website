@@ -1,11 +1,3 @@
-
-// let db;
-// export const connectDB = async() => {
-
-// }
-
-
-
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 let db;
